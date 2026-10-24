@@ -1,11 +1,11 @@
 {
-  "name": "@red-cup-engineering/semiotic-npm-registry-services-section",
+  "name": "@red-cup-engineering/semiotic-npm-registry-engineering-services-section",
   "version": "0.1.1",
   "type": "module",
   "description": "Holds the semiotic layer over the npm registry: graph derivation, receipt recovery, snapshots, release coordination, projections, and consumer dependency-closure installation. Use when working the registry as the machine's semantic catalog rather than as generic npm infrastructure.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/red-cup-engineering/semiotic-npm-registry-services-section.git"
+    "url": "git+https://github.com/red-cup-engineering/semiotic-npm-registry-engineering-services-section.git"
   },
   "exports": {
     "./project-npm-carrier": "./scripts/project-npm-carrier.mjs",

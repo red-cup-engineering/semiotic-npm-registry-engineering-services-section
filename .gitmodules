@@ -2,15 +2,3 @@
 	path = services/npm-registry-graph-services-section
 	url = https://github.com/red-cup-engineering/npm-registry-graph-engineering-services-section.git
 	branch = main
-[submodule "services/npm-registry-audit-service"]
-	path = services/npm-registry-audit-service
-	url = https://github.com/red-cup-engineering/npm-registry-audit-service.git
-	branch = main
-[submodule "services/npm-package-install-resolution-assay-service"]
-	path = services/npm-package-install-resolution-assay-service
-	url = https://github.com/red-cup-engineering/npm-package-install-resolution-assay-service.git
-	branch = main
-[submodule "services/consumer-dependency-closure-installation-service"]
-	path = services/consumer-dependency-closure-installation-service
-	url = https://github.com/red-cup-engineering/consumer-dependency-closure-installation-service.git
-	branch = main

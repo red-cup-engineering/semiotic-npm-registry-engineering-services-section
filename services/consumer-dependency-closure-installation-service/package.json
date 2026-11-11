@@ -1,0 +1,32 @@
+{
+  "name": "@red-cup-engineering/consumer-dependency-closure-installation-service",
+  "version": "0.1.1",
+  "private": false,
+  "type": "module",
+  "description": "Wires one consumer service to the Union private package registry and installs its complete dependency closure, returning one typed receipt that binds every declared bare import to a resolved provider.",
+  "keywords": [
+    "dependency-closure",
+    "npm-registry",
+    "union-private-registry",
+    "capability-cell",
+    "deterministic"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/semiotic-npm-registry-engineering-services-section.git",
+    "directory": "services/consumer-dependency-closure-installation-service"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "check": "node --check src/install-consumer-dependency-closure.mjs && node --check scripts/install-consumer-dependency-closure.mjs && node --check scripts/check-test-summary.mjs",
+    "test": "node --test --test-reporter=tap test/*.test.mjs"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
+  }
+}

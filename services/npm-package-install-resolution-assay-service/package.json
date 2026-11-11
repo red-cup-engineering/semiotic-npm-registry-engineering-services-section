@@ -1,0 +1,43 @@
+{
+  "name": "@red-cup-engineering/npm-package-install-resolution-assay-service",
+  "version": "0.1.1",
+  "description": "Installs selected exact npm package surfaces into isolated temporary consumers with lifecycle scripts disabled, reporting dependency-resolution/install-closure receipts without claiming runtime correctness.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/semiotic-npm-registry-engineering-services-section.git",
+    "directory": "services/npm-package-install-resolution-assay-service"
+  },
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "exports": {
+    ".": "./src/npm-package-install-resolution-assay.mjs"
+  },
+  "bin": {
+    "assay-npm-package-install-resolution": "scripts/assay-npm-package-install-resolution.mjs"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "package.json",
+    "README.md",
+    "docs/API.md",
+    "examples/quickstart.test.mjs"
+  ],
+  "scripts": {
+    "check": "node --check src/npm-package-install-resolution-assay.mjs && node --check scripts/assay-npm-package-install-resolution.mjs",
+    "test": "node --test test/*.test.mjs",
+    "test:consumer": "node --test examples/quickstart.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
+  }
+}

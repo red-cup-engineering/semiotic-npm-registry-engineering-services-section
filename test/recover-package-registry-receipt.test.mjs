@@ -5,7 +5,7 @@ import { join } from "node:path";
 import test from "node:test";
 
 import { recoverPackageRegistryReceipt } from "../scripts/recover-package-registry-receipt.mjs";
-import { measureArtifactBytes } from "@red-cup-engineering/npm-registry-services-section/npm-artifact-integrity-service";
+import { measureArtifactBytes } from "@red-cup-engineering/npm-registry-engineering-services-section/npm-artifact-integrity-service";
 
 async function writeRelease(root, { name, version, bytes }) {
   const [scope, leaf] = name.slice(1).split("/");

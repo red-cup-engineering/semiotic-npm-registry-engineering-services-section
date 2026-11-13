@@ -54,7 +54,7 @@
     "@red-cup-engineering/a2a-rmn-part-service": "1.0.1",
     "@red-cup-engineering/gcloud-runtime-authorities-service": "1.0.0",
     "@red-cup-engineering/immutable-content-custody-service": "1.0.3",
-    "@red-cup-engineering/json-schema-services-section": "0.1.3",
+    "@red-cup-engineering/json-schema-engineering-services-section": "0.1.3",
     "@red-cup-engineering/ni-uri-services-section": "0.1.1",
     "@red-cup-engineering/relation-model-notation-cbor-codec": "0.0.1",
     "@red-cup-engineering/relation-model-notation-json-codec": "0.0.3",

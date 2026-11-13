@@ -2,7 +2,7 @@ import {
   deriveRegistryGraph as defaultDeriveRegistryGraph,
   groupRegistryGraphDefects as defaultGroupRegistryGraphDefects,
   renderRegistryGraphDot as defaultRenderRegistryGraphDot,
-} from "@red-cup-engineering/npm-registry-graph-services-section";
+} from "@red-cup-engineering/npm-registry-graph-engineering-services-section";
 
 import { deriveInternalRegistryScopes } from "./internal-registry-scopes.mjs";
 

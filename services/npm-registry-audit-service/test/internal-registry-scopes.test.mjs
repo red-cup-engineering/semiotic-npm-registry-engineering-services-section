@@ -3,7 +3,7 @@ import test from "node:test";
 
 import { deriveInternalRegistryScopes } from "../src/internal-registry-scopes.mjs";
 
-// Mirrors the real verdaccio-services-section config.yaml shape: an anchor on
+// Mirrors the real verdaccio-engineering-services-section config.yaml shape: an anchor on
 // the first scope, aliased on the rest, two bare (non-scope) package names,
 // and the `**` catch-all — every shape the extractor must handle.
 const CONFIG_YAML = `storage: ../../data/storage

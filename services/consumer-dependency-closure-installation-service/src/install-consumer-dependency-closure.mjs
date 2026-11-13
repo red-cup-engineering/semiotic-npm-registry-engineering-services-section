@@ -2,14 +2,14 @@
 // private package registry and install its complete dependency closure.
 //
 // Executable source composed from three crystallized prior implementations:
-//   (a) npm-registry-service/src/package-registry.mjs (npm-registry-services-section) —
+//   (a) npm-registry-service/src/package-registry.mjs (npm-registry-engineering-services-section) —
 //       the client.npmrc materialization (public default registry plus one
 //       scoped registry line per Union scope), which this kernel reads back
 //       from the live registry rather than re-deriving;
 //   (b) the settled consumer .npmrc pattern (gemini-inference-team,
 //       recursive-infomaterial-fabrication-service): public registry default
 //       plus Union scopes routed to the private registry;
-//   (c) check-npm-registry-package-installations-service (npm-registry-services-section) — the declared-import
+//   (c) check-npm-registry-package-installations-service (npm-registry-engineering-services-section) — the declared-import
 //       resolution law (import.meta.resolve exercised from the consumer's own
 //       membrane in a child Node process).
 //

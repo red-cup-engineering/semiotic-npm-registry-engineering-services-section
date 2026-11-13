@@ -25,7 +25,6 @@
     "scripts",
     "package.json",
     "README.md",
-    "docs/API.md",
     "examples/quickstart.test.mjs"
   ],
   "scripts": {

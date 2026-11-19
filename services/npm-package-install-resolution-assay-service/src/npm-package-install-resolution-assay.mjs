@@ -88,7 +88,7 @@ async function defaultConsumerFactory(surface) {
   return directory;
 }
 
-async function assayOne({ surface, registryUrl, npmCommand, timeoutMs, installImplementation, consumerFactory, cleanup }) {
+async function checkOne({ surface, registryUrl, npmCommand, timeoutMs, installImplementation, consumerFactory, cleanup }) {
   const parsed = parseExactPackageSurface(surface);
   const consumer = await consumerFactory(parsed.surface);
   try {
@@ -134,7 +134,7 @@ async function boundedMap(values, concurrency, mapper) {
   return results;
 }
 
-export async function assayPackageInstallResolution({
+export async function checkPackageInstallResolution({
   packageSurfaces,
   registryUrl = DEFAULT_REGISTRY,
   npmCommand = "npm",
@@ -149,7 +149,7 @@ export async function assayPackageInstallResolution({
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1) throw new TypeError("timeoutMs must be a positive integer");
   const surfaces = [...new Set(packageSurfaces)].sort();
   surfaces.forEach(parseExactPackageSurface);
-  const outcomes = await boundedMap(surfaces, concurrency, (surface) => assayOne({
+  const outcomes = await boundedMap(surfaces, concurrency, (surface) => checkOne({
     surface, registryUrl, npmCommand, timeoutMs, installImplementation, consumerFactory, cleanup,
   }));
   const failuresByCategory = {};

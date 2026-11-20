@@ -1,5 +1,6 @@
+import { makeTemporaryDirectory } from "@red-cup-engineering/computer-file-engineering-services-section/temporary-directory";
 import { mkdir, mkdtemp, readFile, rename, rm } from "node:fs/promises";
-import { tmpdir } from "node:os";
+
 import { join, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 
@@ -98,7 +99,9 @@ export async function coordinateNpmRegistryRelease({
   const lease = await broker.acquire(Object.freeze({ workUnits: directories.length, requestedParallelism }));
   const grantedParallelism = parallelism(lease?.parallelism, requestedParallelism);
   if (typeof lease?.provider !== "string" || !lease.provider || !lease.settlement) throw new Error("compute lease must declare provider and settlement");
-  const artifactDirectory = await mkdtemp(join(tmpdir(), "npm-registry-prepared-artifacts-"));
+  const temporaryDirectory = makeTemporaryDirectory("npm-registry-prepared-artifacts");
+  try {
+const artifactDirectory = temporaryDirectory.path;
   let failed = false;
   try {
     const manifests = await Promise.all(directories.map(async (directory) => ({ directory, manifest: JSON.parse(await readFile(join(directory, "package.json"), "utf8")) })));
@@ -119,5 +122,9 @@ export async function coordinateNpmRegistryRelease({
     if (typeof lease?.release === "function") {
       try { await lease.release(); } catch (error) { if (!failed) throw error; }
     }
+  }
+
+  } finally {
+    temporaryDirectory.remove();
   }
 }

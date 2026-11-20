@@ -22,7 +22,7 @@ function versionOrder(left, right) {
 // The served metadata and tarballs are sufficient to reconstruct the receipt.
 // A missing receipt must not make an otherwise intact registry permanently
 // unpublishable.
-export async function recoverPackageRegistryRecord({ registryDirectory, registryUrl }) {
+export async function recoverPackageRegistryReceipt({ registryDirectory, registryUrl }) {
   const root = resolve(registryDirectory);
   const base = new URL(registryUrl);
   if (!/^https?:$/u.test(base.protocol)) throw new TypeError("registryUrl must be absolute HTTP(S)");

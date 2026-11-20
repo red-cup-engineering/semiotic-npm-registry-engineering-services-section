@@ -17,11 +17,11 @@
 //     or  a usage refusal (exit 2).
 
 import { readFileSync } from "node:fs";
-import { installConsumerDependencyClosure, ClosureRejection } from "../src/install-consumer-dependency-closure.mjs";
+import { installConsumerDependencyClosure, ClosureRefusal } from "../src/install-consumer-dependency-closure.mjs";
 
 const OK = 0;
 const USAGE = 2;
-const REJECTED = 3;
+const REFUSED = 3;
 
 function emit(record, code) {
   process.stdout.write(`${JSON.stringify(record, null, 2)}\n`);
@@ -52,6 +52,6 @@ try {
   });
   emit(receipt, OK);
 } catch (error) {
-  if (error instanceof ClosureRejection) emit(error.refusal, REJECTED);
-  emit({ type: "ConsumerDependencyClosureRefusal", version: 1, law: "unexpected", diagnostic: error.message }, REJECTED);
+  if (error instanceof ClosureRefusal) emit(error.refusal, REFUSED);
+  emit({ type: "ConsumerDependencyClosureRefusal", version: 1, law: "unexpected", diagnostic: error.message }, REFUSED);
 }

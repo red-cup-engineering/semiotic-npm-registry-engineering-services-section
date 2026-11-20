@@ -26,15 +26,15 @@ const EXACT_VERSION = /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9A-
 const PLAIN_VERSION = /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/u;
 const SCOPE_LINE = /^@([a-z0-9-]+):registry=(\S+)$/u;
 
-export class ClosureRejection extends Error {
-  constructor(rejection) {
-    super(`${rejection.type}: ${rejection.law}`);
-    this.refusal = Object.freeze({ type: "ConsumerDependencyClosureRefusal", version: 1, ...rejection });
+export class ClosureRefusal extends Error {
+  constructor(refusal) {
+    super(`${refusal.type}: ${refusal.law}`);
+    this.refusal = Object.freeze({ type: "ConsumerDependencyClosureRefusal", version: 1, ...refusal });
   }
 }
 
 function refuse(law, detail) {
-  throw new ClosureRejection({ law, ...detail });
+  throw new ClosureRefusal({ law, ...detail });
 }
 
 async function readConsumerManifest(consumer) {
@@ -54,7 +54,7 @@ async function unionScopeRoster({ registryUrl, fetchImplementation }) {
     if (!response.ok) refuse("registry-unreachable", { registry: registryUrl, diagnostic: `client.npmrc HTTP ${response.status}` });
     body = await response.text();
   } catch (error) {
-    if (error instanceof ClosureRejection) throw error;
+    if (error instanceof ClosureRefusal) throw error;
     refuse("registry-unreachable", { registry: registryUrl, diagnostic: error.message });
   }
   const scopes = [];
@@ -102,7 +102,7 @@ async function verifyUnionAvailability({ rows, unionScopes, registryUrl, fetchIm
       if (!response.ok) refuse("registry-unreachable", { registry: registryUrl, package: row.name, diagnostic: `HTTP ${response.status}` });
       metadata = await response.json();
     } catch (error) {
-      if (error instanceof ClosureRejection) throw error;
+      if (error instanceof ClosureRefusal) throw error;
       refuse("registry-unreachable", { registry: registryUrl, package: row.name, diagnostic: error.message });
     }
     if (!Object.hasOwn(metadata.versions ?? {}, row.spec)) {
@@ -221,7 +221,7 @@ async function runInstall({ consumer, npmCommand }) {
   }
 }
 
-function originOf(resolved, registryUrl) {
+function provenanceOf(resolved, registryUrl) {
   if (typeof resolved !== "string") return "workspace";
   const origin = (candidate) => {
     try {
@@ -247,8 +247,8 @@ async function readInstalledTree({ consumer, registryUrl }) {
   for (const [path, entry] of Object.entries(lock.packages ?? {})) {
     if (path === "") continue;
     const name = entry.name ?? path.slice(path.lastIndexOf("node_modules/") + "node_modules/".length);
-    provenance[originOf(entry.resolved, registryUrl)] += 1;
-    if (!installed.has(name)) installed.set(name, { version: entry.version, source: originOf(entry.resolved, registryUrl) });
+    provenance[provenanceOf(entry.resolved, registryUrl)] += 1;
+    if (!installed.has(name)) installed.set(name, { version: entry.version, source: provenanceOf(entry.resolved, registryUrl) });
   }
   return { installedPackages: Object.keys(lock.packages ?? {}).filter((path) => path !== "").length, provenance, installed };
 }
